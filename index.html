@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ed Patrick O. Vega · portfolio</title>
+  <!-- Font Awesome 5 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter & Space Grotesk for a clean, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ----- CSS reset & base styles ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #070b16;
+      --surface: rgba(18, 19, 31, 0.7);
+      --text-primary: #f4f1ff;
+      --text-secondary: #e9def8;
+      --text-muted: #d5c7ef;
+      --accent: #f7a7d3;
+      --accent-soft: rgba(247, 167, 211, 0.2);
+      --border-light: rgba(255, 255, 255, 0.12);
+      --shadow-sm: 0 10px 30px rgba(6, 7, 16, 0.28);
+      --shadow-md: 0 18px 45px rgba(16, 10, 26, 0.38);
+      --radius-md: 24px;
+      --radius-sm: 18px;
+      --transition: all 0.2s ease;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 166, 214, 0.38), transparent 30%),
+        radial-gradient(circle at 70% 25%, rgba(182, 121, 255, 0.35), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(67, 35, 91, 0.95), transparent 35%),
+        linear-gradient(135deg, #040711 0%, #120a1f 30%, #1d0d2d 60%, #0b0f1a 100%);
+      background-attachment: fixed;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background: repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0 1px, transparent 1px 2px);
+      mix-blend-mode: screen;
+    }
+
+    .portfolio {
+      max-width: 1160px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ----- typography & helpers ----- */
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2 i {
+      color: var(--accent);
+      font-size: 1.5rem;
+      width: 2rem;
+    }
+
+    .section-subhead {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    /* ----- card style (shared) ----- */
+    .card {
+      background-color: var(--surface);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      padding: 1.75rem;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ----- header / intro section ----- */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      background: rgba(18, 19, 31, 0.46);
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-md);
+      padding: 2rem 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .intro-text .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(247,167,211,0.18), rgba(183,122,255,0.18));
+      color: #ffd9ef;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .intro-text h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .intro-text .tagline {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+      max-width: 550px;
+      text-shadow: 0 0 18px rgba(247, 167, 211, 0.12);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      margin-top: 1.25rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .contact-links a {
+      color: #f4ebff;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px solid transparent;
+    }
+
+    .contact-links a i {
+      color: var(--accent);
+      font-size: 1rem;
+      width: 1.2rem;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ----- avatar (with your photo) ----- */
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid white;
+      box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.25);
+      transition: var(--transition);
+      flex-shrink: 0;
+      background-color: #e2e8f0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+
+    .avatar:hover {
+      transform: scale(1.02);
+      box-shadow: 0 18px 35px -8px rgba(37, 99, 235, 0.35);
+    }
+
+    /* ----- main grid ----- */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ----- ACHIEVEMENTS list (left side) ----- */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .project-item {
+      background: rgba(14, 18, 30, 0.7);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light);
+      padding: 1.25rem 1.5rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .project-item:hover {
+      border-color: var(--accent-soft);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      gap: 0.75rem;
+    }
+
+    .project-header h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .project-header .project-year {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #f5ecff;
+      background-color: rgba(166, 131, 255, 0.18);
+      padding: 0.2rem 0.7rem;
+      border-radius: 40px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-desc {
+      color: #f4ebff;
+      font-size: 0.92rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tech-tags span {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #f5ecff;
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 40px;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .tech-tags span i {
+      color: #f5ecff;
+      font-size: 0.7rem;
+    }
+
+    /* ----- sidebar (right side) ----- */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .skill-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .skill-icon {
+      width: 2rem;
+      color: var(--accent);
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .skill-bar-bg {
+      flex: 1;
+      height: 6px;
+      background-color: #e9eef3;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 6px;
+      background-color: var(--accent);
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .skill-label {
+      min-width: 90px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* education */
+    .edu-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: var(--accent-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .edu-content h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-content .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ----- footer ----- */
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-note .social-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-note .social-links a {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .footer-note .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ----- responsive ----- */
+    @media (max-width: 900px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+
+      .intro-text .tagline {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-links {
+        justify-content: center;
+      }
+
+      .avatar {
+        margin: 0 auto;
+        width: 140px;
+        height: 140px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .intro-text h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      .footer-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio">
+
+    <!-- ===== HERO / INTRO ===== -->
+    <header class="intro">
+      <div class="intro-text">
+        <span class="badge"><i class="fas fa-code"></i> front-end & UI · Video Editor</span>
+        <h1>Ed Patrick O. Vega</h1>
+        <p class="tagline">Crafting clean, accessible interfaces with a focus on detail and performance.</p>
+        <div class="contact-links">
+          <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener noreferrer"><i class="fas fa-envelope"></i> edpatrickvega7@gmail.com</a>
+          <a href="tel:09278813090"><i class="fas fa-phone-alt"></i> 09278813090</a>
+          <a href="https://maps.google.com/?q=Philippines" target="_blank" rel="noopener noreferrer"><i class="fas fa-map-marker-alt"></i> Philippines</a>
+        </div>
+      </div>
+
+      <!-- ✅ Profile picture -->
+      <div class="avatar" aria-label="Profile picture">
+        <img src="file:///C:/Users/Admin/OneDrive/index/profile/img1.jpg" alt="Ed Patrick O. Vega profile photo" onerror="this.onerror=null; this.src='profile/pic.png';">
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-grid">
+
+      <!-- LEFT: ACHIEVEMENTS & CERTIFICATIONS -->
+      <section>
+        <h2><i class="fas fa-award"></i> Achievements & Certifications</h2>
+        <div class="project-list">
+
+          <!-- 1. NDRRMC Training Certificate -->
+          <article class="project-item">
+            <div class="project-header">
+              <h3>NDRRMC Training Certificate</h3>
+              <span class="project-year">Certified</span>
+            </div>
+            <p class="project-desc">
+              Completed official training from the National Disaster Risk Reduction and Management Council — equipped with disaster preparedness, response, and emergency management skills.
+            </p>
+            <div class="tech-tags">
+              <span><i class="fas fa-shield-alt"></i> Disaster Response</span>
+              <span><i class="fas fa-hand-holding-heart"></i> Emergency Preparedness</span>
+            </div>
+          </article>
+
+          <!-- 2. NSTP Training -->
+          <article class="project-item">
+            <div class="project-header">
+              <h3>NSTP Training</h3>
+              <span class="project-year">Certified</span>
+            </div>
+            <p class="project-desc">
+              Completed the National Service Training Program — developing civic consciousness, community service, and national defense awareness.
+            </p>
+            <div class="tech-tags">
+              <span><i class="fas fa-flag"></i> Civic Duty</span>
+              <span><i class="fas fa-users"></i> Community Service</span>
+            </div>
+          </article>
+
+          <!-- 3. Student Leadership Program Certificate -->
+          <article class="project-item">
+            <div class="project-header">
+              <h3>Student Leadership Program Certificate</h3>
+              <span class="project-year">Certified</span>
+            </div>
+            <p class="project-desc">
+              Successfully completed a leadership development program focused on team management, communication, and student governance.
+            </p>
+            <div class="tech-tags">
+              <span><i class="fas fa-user-tie"></i> Leadership</span>
+              <span><i class="fas fa-comments"></i> Communication</span>
+            </div>
+          </article>
+
+          <!-- 4. PIO on Paramedics 2025 -->
+          <article class="project-item">
+            <div class="project-header">
+              <h3>PIO on Paramedics</h3>
+              <span class="project-year">2025</span>
+            </div>
+            <p class="project-desc">
+              Served as Public Information Officer for paramedic operations in 2025 — handling communications, coordination, and public safety information during emergency response activities.
+            </p>
+            <div class="tech-tags">
+              <span><i class="fas fa-bullhorn"></i> Public Information</span>
+              <span><i class="fas fa-ambulance"></i> Paramedics</span>
+              <span><i class="fas fa-calendar-check"></i> 2025</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- RIGHT: SKILLS + EDUCATION -->
+      <div class="sidebar">
+
+        <!-- skills card -->
+        <section class="card">
+          <h2><i class="fas fa-cog"></i> Tech & tools</h2>
+          <div class="skill-group">
+
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fab fa-java"></i></div>
+              <span class="skill-label">Java</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%"></div></div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fab fa-react"></i></div>
+              <span class="skill-label">React</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%"></div></div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+              <span class="skill-label">CSS / Tailwind</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 95%"></div></div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fab fa-figma"></i></div>
+              <span class="skill-label">Figma</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%"></div></div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-icon"><i class="fas fa-video"></i></div>
+              <span class="skill-label">Video Editor</span>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- education -->
+        <section class="card">
+          <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fas fa-school"></i></div>
+            <div class="edu-content">
+              <h4>MNES</h4>
+              <div class="meta">2018 – 2019</div>
+              <p>Elementary education</p>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fas fa-school"></i></div>
+            <div class="edu-content">
+              <h4>MKYNHS</h4>
+              <div class="meta">2022 – 2023</div>
+              <p>Junior High School</p>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fas fa-school"></i></div>
+            <div class="edu-content">
+              <h4>SVPDC</h4>
+              <div class="meta">2024 – 2025</div>
+              <p>Senior High School</p>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-icon"><i class="fas fa-university"></i></div>
+            <div class="edu-content">
+              <h4>De La Salle John Bosco</h4>
+              <div class="meta">Currently studying</div>
+              <p>Bachelor of Science in Information Technology</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-note">
+      <div>© 2025 Ed Patrick O. Vega — built with HTML & CSS</div>
+      <div class="social-links">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://dribbble.com/" target="_blank" rel="noopener noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+        <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
